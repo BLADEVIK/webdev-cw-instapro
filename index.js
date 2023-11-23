@@ -34,10 +34,6 @@ export const logout = () => {
 	removeUserFromLocalStorage();
 	goToPage(POSTS_PAGE);
 };
-
-/**
- * Включает страницу приложения
- */
 export const goToPage = (newPage, data) => {
 	if (
 		[
@@ -49,7 +45,6 @@ export const goToPage = (newPage, data) => {
 		].includes(newPage)
 	) {
 		if (newPage === ADD_POSTS_PAGE) {
-			// Если пользователь не авторизован, то отправляем его на авторизацию перед добавлением поста
 			page = user ? ADD_POSTS_PAGE : AUTH_PAGE;
 			return renderApp();
 		}
@@ -123,7 +118,6 @@ export const renderApp = () => {
 		return renderAddPostPageComponent({
 			appEl,
 			onAddPostClick({ description, imageUrl }) {
-				// TODO: реализовать добавление поста в API
 				console.log("Добавляю пост...", { description, imageUrl });
 				addPost({ 
 					description, 
@@ -146,8 +140,6 @@ export const renderApp = () => {
 	}
 
 	if (page === USER_POSTS_PAGE) {
-		// TODO: реализовать страницу фотографию пользвателя
-		// appEl.innerHTML = "Здесь будет страница фотографий пользователя";
 		return renderPostsPageComponent({
 			appEl,
 		});
