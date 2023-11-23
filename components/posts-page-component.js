@@ -1,15 +1,12 @@
 import { USER_POSTS_PAGE } from "../routes.js";
 import { renderHeaderComponent } from "./header-component.js";
-import { posts, goToPage, getToken, page, renderApp, setPosts } from "../index.js";
-import { getPosts, addLikePost, removeLikePost } from "../api.js";
+import { posts, goToPage, getToken,renderApp } from "../index.js";
+import {  addLikePost, removeLikePost } from "../api.js";
 import { formatDistance } from 'date-fns'
 import { ru } from 'date-fns/locale'
 import { replaceSave } from "../helpers.js";
 
 export function renderPostsPageComponent({ appEl }) {
-
-	// TODO: реализовать рендер постов из api!
-	console.log("Актуальный список постов:", posts);
 	let message = null;
 	if (posts) {
 		const getApiPosts = posts.map((postItem) => {
@@ -23,7 +20,7 @@ export function renderPostsPageComponent({ appEl }) {
 				userLogin: postItem.user.login,
 				postImageUserUrl: postItem.user.imageUrl,
 				usersLikes: postItem.likes,
-				isLiked: postItem.isLiked,
+				isLiked:  postItem.isLiked,
 			}
 		})
 		message = getApiPosts.map((postItem, index) => {
@@ -70,12 +67,6 @@ export function renderPostsPageComponent({ appEl }) {
 	} else {
 		message = "постов нет";
 	}
-
-	/**
-	 * TODO: чтобы отформатировать дату создания поста в виде "19 минут назад"
-	 * можно использовать https://date-fns.org/v2.29.3/docs/formatDistanceToNow
-	 */
-
 	const originHtml = `	
 	<div class="page-container">
 	<div class="header-container"></div>
@@ -109,7 +100,7 @@ export function likeEventListener() {
 		likeButton.addEventListener('click', (event) => {
 			event.stopPropagation()
 			const postId = likeButton.dataset.postId
-			const index = likeButton.dataset.index
+			const index =  likeButton.dataset.index 
 
 
 			if (posts[index].isLiked) {
@@ -152,7 +143,7 @@ export function likeEventListenerOnIMG() {
 				addLikePost({ token: getToken(), postId })
 					.then((updatedPost) => {
 						posts[index].isLiked = true
-						posts[index].likes = updatedPost.post.likes;
+						posts[index].likes =updatedPost.post.likes;
 						renderApp();
 					})
 			}
