@@ -45,7 +45,7 @@ export function renderPostsPageComponent({ appEl }) {
 				Нравится: ${
 					postItem.usersLikes.length > 0
 							? `${
-								postItem.usersLikes[postItem.usersLikes.length - 1].name
+								replaceSave(postItem.usersLikes[postItem.usersLikes.length - 1].name)
 								} ${
 									postItem.usersLikes.length - 1 > 0
 												? 'и ещё ' + (postItem.usersLikes.length - 1)
